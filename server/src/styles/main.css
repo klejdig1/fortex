@@ -1,0 +1,22 @@
+.title {
+    color: aqua;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+
+.account-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color:aliceblue;
+    padding: 7rem;
+    border-radius: 25px;
+}
+
+.main-container {
+    
+}

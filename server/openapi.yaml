@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: Dortex CRM API
+  version: 0.1.0
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a user
+  /api/auth/login:
+    post:
+      summary: Login
+  /api/clients:
+    get:
+      summary: List clients
+    post:
+      summary: Create client
