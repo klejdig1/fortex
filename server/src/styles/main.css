@@ -5,18 +5,44 @@
     align-items: center;
 }
 
-
-.account-form{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    background-color:aliceblue;
-    padding: 7rem;
-    border-radius: 25px;
+.main-container {
+    width: 100%;
+    max-width: min(460px, calc(100vw - 2rem));
+    margin: clamp(1.5rem, 6vw, 2.5rem) auto;
+    padding: 0 1rem;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.main-container {
-    
+.account-form {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: clamp(2rem, 6vw, 3rem);
+    border-radius: 24px;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+}
+
+.account-form h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+    margin-bottom: 0.35rem;
+}
+
+.account-form > p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 380px) {
+    .account-form {
+        padding: 1.5rem;
+    }
 }

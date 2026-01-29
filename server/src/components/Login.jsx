@@ -15,7 +15,7 @@ export default function Login() {
         setErr('');
         try {
             await login(email, password);
-            navigate('/');
+            navigate('/dashboard');
         } catch (e) {
             setErr(e.message);
         }
@@ -37,7 +37,7 @@ export default function Login() {
                 <div>
                     <button className="btn-form" type="submit">Login</button>
                 </div>
-                {err && <p style={{ color: 'red' }}>{err}</p>}
+                {err && <p className="form-error">{err}</p>}
             </form>
         </div>
     );

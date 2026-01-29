@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthProvider.jsx';
+import '../styles/main.css';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -15,15 +16,15 @@ export default function Register() {
         setErr('');
         try {
             await register(email, password, name);
-            navigate('/');
+            navigate('/dashboard');
         } catch (e) {
             setErr(e.message);
         }
     }
 
     return (
-        <div className="card">
-   <form className="account-form">
+        <div className="main-container">
+   <form className="account-form" onSubmit={submit}>
 
 <h2>Create Account</h2>
 <p>Join us today 🚀</p>
@@ -34,6 +35,8 @@ export default function Register() {
     id="name"
     type="text"
     placeholder="Enter your name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
     required
   />
 </div>
@@ -44,6 +47,8 @@ export default function Register() {
     id="email"
     type="email"
     placeholder="Enter email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
     required
   />
 </div>
@@ -54,6 +59,8 @@ export default function Register() {
     id="password"
     type="password"
     placeholder="Enter password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
     required
   />
 </div>
@@ -61,6 +68,8 @@ export default function Register() {
 <button type="submit" className="btn-form">
   Create account
 </button>
+
+{err && <p className="form-error">{err}</p>}
 
 </form>
         </div>
