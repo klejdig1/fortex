@@ -13,8 +13,16 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-const FRONTEND = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
-app.use(cors({ origin: FRONTEND }));
+// Allow one origin or comma-separated list (e.g. https://fortex01.netlify.app,http://localhost:5173)
+const originEnv = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
+const allowedOrigins = originEnv.split(',').map((o) => o.trim()).filter(Boolean);
+app.use(cors({
+    origin: (origin, cb) => {
+        if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+        cb(new Error('Not allowed by CORS'));
+    },
+    credentials: true
+}));
 
 app.use(morgan('dev'));
 app.use(rateLimit({ windowMs: 60_000, max: 300 }));

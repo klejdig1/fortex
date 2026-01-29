@@ -28,8 +28,10 @@ Steps in short:
 
 On the backend service, set:
 
-- `FRONTEND_ORIGIN` = your Netlify URL (e.g. `https://your-app.netlify.app`)  
-  so CORS allows the Netlify site to call the API.
+- `FRONTEND_ORIGIN` = your Netlify URL (e.g. `https://fortex01.netlify.app`)  
+  so CORS allows the Netlify site to call the API.  
+  You can allow multiple origins separated by commas:  
+  `https://fortex01.netlify.app,http://localhost:5173`
 
 ---
 
@@ -51,6 +53,6 @@ Vite bakes `VITE_API_BASE` into the build, so a new deploy is required after cha
 | Where        | What to set                | Example                          |
 |-------------|----------------------------|----------------------------------|
 | Netlify     | `VITE_API_BASE`           | `https://fortex-api.onrender.com` |
-| Backend host| `FRONTEND_ORIGIN`         | `https://your-app.netlify.app`   |
+| Backend host| `FRONTEND_ORIGIN`         | `https://fortex01.netlify.app`   |
 
 After that, the site on Netlify will call your deployed API instead of `localhost:4000`, and the connection refused error should go away.
