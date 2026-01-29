@@ -13,7 +13,7 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-// Allow FRONTEND_ORIGIN (comma-separated) plus these defaults so Netlify works even if env is wrong
+// CORS: allow Netlify frontend + localhost. Explicit methods so preflight passes.
 const defaultOrigins = ['http://localhost:5173', 'https://fortex01.netlify.app'];
 const originEnv = process.env.FRONTEND_ORIGIN || '';
 const envOrigins = originEnv.split(',').map((o) => o.trim()).filter(Boolean);
@@ -23,6 +23,7 @@ app.use(cors({
         if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
         cb(new Error('Not allowed by CORS'));
     },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
 
