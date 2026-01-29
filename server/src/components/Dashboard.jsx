@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthProvider.jsx';
+import { getApiBase } from '../utils/api.js';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:4000';
+const API_BASE = getApiBase();
 
 function fetchWithAuth(path, token) {
     return fetch(`${API_BASE}${path}`, {

@@ -13,9 +13,11 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-// Allow one origin or comma-separated list (e.g. https://fortex01.netlify.app,http://localhost:5173)
-const originEnv = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
-const allowedOrigins = originEnv.split(',').map((o) => o.trim()).filter(Boolean);
+// Allow FRONTEND_ORIGIN (comma-separated) plus these defaults so Netlify works even if env is wrong
+const defaultOrigins = ['http://localhost:5173', 'https://fortex01.netlify.app'];
+const originEnv = process.env.FRONTEND_ORIGIN || '';
+const envOrigins = originEnv.split(',').map((o) => o.trim()).filter(Boolean);
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 app.use(cors({
     origin: (origin, cb) => {
         if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
