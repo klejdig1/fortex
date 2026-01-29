@@ -19,13 +19,16 @@ const originEnv = process.env.FRONTEND_ORIGIN || '';
 const envOrigins = originEnv.split(',').map((o) => o.trim()).filter(Boolean);
 const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 app.use(cors({
-    origin: (origin, cb) => {
-        if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-        cb(new Error('Not allowed by CORS'));
-    },
+    origin: [
+      'http://localhost:5173',
+      'https://fortex01.netlify.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
-}));
+  }));
+  
+  app.options('*', cors());
+  
 
 app.use(morgan('dev'));
 app.use(rateLimit({ windowMs: 60_000, max: 300 }));
